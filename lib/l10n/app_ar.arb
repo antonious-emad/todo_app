@@ -1,0 +1,18 @@
+{
+  "settings": "الاعدادات",
+  "language": "اللغة",
+  "theming": "الوضع",
+  "english": "English",
+  "arabic": "العربية",
+  "light": "مضئ",
+  "dark": "مظلم",
+  "addnewtask":"اضافة مهمة جديدة",
+  "enteryourtasktitle":"ادخل عنوان المهمة",
+  "enteryourtaskdetails": "ادخل موضوع المهمة",
+  "selecttime": "اختر التاريخ",
+  "savetask": "حفظ المهمة",
+  "tasktitle": "عنوان المهمة",
+  "taskdetails": "تفاصيل المهمة",
+  "savechanges": "حفظ التعديلات",
+  "done" : "! تمت"
+}

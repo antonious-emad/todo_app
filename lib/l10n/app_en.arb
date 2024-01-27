@@ -1,0 +1,19 @@
+{
+
+  "settings": "Settings",
+  "language": "Language",
+  "theming": "Theming",
+  "english": "English",
+  "arabic": "العربية",
+  "light": "Light",
+  "dark": "Dark",
+  "addnewtask":"Add New Task",
+  "enteryourtasktitle":"Enter Your Task Title",
+  "enteryourtaskdetails": "Enter Your Task Details",
+  "selecttime": "Select Time",
+  "savetask": "Save Task",
+  "tasktitle": "Task Title",
+  "taskdetails": "Task Details",
+  "savechanges": "Save Changes",
+   "done" : "Done !"
+}
