@@ -6,11 +6,17 @@ import 'package:third/screens/tasks_tab/task_item.dart';
 import 'package:third/shared/network/firebase/firebase_functions.dart';
 import 'package:third/shared/styles/colors.dart';
 import '../../providers/provider.dart';
-class TasksTab extends StatelessWidget {
+class TasksTab extends StatefulWidget {
   static const String routeName = "TasksTab";
 
   const TasksTab({super.key});
 
+  @override
+  State<TasksTab> createState() => _TasksTabState();
+}
+
+class _TasksTabState extends State<TasksTab> {
+  var selectedDate=DateTime.now();
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<MyProider>(context);
@@ -35,13 +41,13 @@ class TasksTab extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 200,
                 child: CalendarTimeline(
-                  initialDate: DateTime.now().subtract(Duration(days: 365)),
-                  // initialDate: selectedDate,
+                  // initialDate: DateTime.now().subtract(Duration(days: 365)),
+                  initialDate: selectedDate,
                   firstDate: DateTime.now().subtract(Duration(days: 365)),
                   lastDate: DateTime.now().add(Duration(
                     days: 365,
                   )),
-                  onDateSelected: (date) {},
+                  onDateSelected: (date) {selectedDate=date;provider.changeselected(date);setState(() {});},
                   monthColor: MainColors.whited,
                   dayColor: provider.isDark ? MainColors.whited : Colors.black,
                   dayNameColor: Colors.blue.withOpacity(.5),
@@ -60,7 +66,7 @@ class TasksTab extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.05,
         ),
         FutureBuilder(
-          future: FirebaseFunctions.getTasks(),
+          future: FirebaseFunctions.getTasks(selectedDate),
           builder: (context, snapshot) {
             if(snapshot.connectionState==ConnectionState.waiting){return Center(child: CircularProgressIndicator());}
             if(snapshot.hasError){return Center(child: Text("Something Went wrong"));}

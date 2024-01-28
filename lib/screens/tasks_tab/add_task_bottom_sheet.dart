@@ -69,7 +69,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 style:ElevatedButton.styleFrom(backgroundColor: MainColors.secondryLightColor) ,
                 onPressed: (){
                if(formkey.currentState!.validate()){
-                 TaskModel task=TaskModel(tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text, tasktime: selecteddate.millisecondsSinceEpoch);
+                 TaskModel task=TaskModel(tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text, tasktime:DateUtils.dateOnly(selecteddate).millisecondsSinceEpoch);
                  FirebaseFunctions.addTask(task).then((value) {Navigator.pop(context);});
                }
             },
