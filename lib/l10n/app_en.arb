@@ -15,5 +15,7 @@
   "tasktitle": "Task Title",
   "taskdetails": "Task Details",
   "savechanges": "Save Changes",
-   "done" : "Done !"
+   "done" : "Done !",
+  "edittask": "Edit Task"
+
 }

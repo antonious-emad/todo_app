@@ -1,11 +1,14 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:third/models/task_model.dart';
+import 'package:third/screens/login_tab/login_tab.dart';
 import 'package:third/screens/tasks_tab/task_item.dart';
 import 'package:third/shared/network/firebase/firebase_functions.dart';
 import 'package:third/shared/styles/colors.dart';
 import '../../providers/provider.dart';
+import '../login_tab/login.dart';
 class TasksTab extends StatefulWidget {
   static const String routeName = "TasksTab";
 
@@ -14,7 +17,6 @@ class TasksTab extends StatefulWidget {
   @override
   State<TasksTab> createState() => _TasksTabState();
 }
-
 class _TasksTabState extends State<TasksTab> {
   var selectedDate=DateTime.now();
   @override
@@ -28,9 +30,25 @@ class _TasksTabState extends State<TasksTab> {
           // alignment: Alignment.bottomLeft,
           children: [
             Container(
-              padding: EdgeInsets.all(38),
-              child: Text("To Do List",
-                  style: Theme.of(context).textTheme.bodyLarge),
+              padding: EdgeInsets.all(20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("To Do List ${provider.userModel?.name} ",
+                      style: Theme.of(context).textTheme.bodyLarge),
+                  Spacer(),
+                  InkWell(onTap: () {
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(context, Login.routeName, (route) => false);
+                  },child: Icon(Icons.logout)),
+                  InkWell(onTap: () {
+                    FirebaseAuth.instance.sendPasswordResetEmail(email: provider.userModel!.email );
+                    Navigator.pushNamedAndRemoveUntil(context, Login.routeName, (route) => false);
+                  },child: Icon(Icons.send)),
+
+                ],
+              ),
               height: MediaQuery.of(context).size.height * 0.18,
               width: double.infinity,
               color: Theme.of(context).colorScheme.onSecondary,
@@ -65,15 +83,26 @@ class _TasksTabState extends State<TasksTab> {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.05,
         ),
-        FutureBuilder(
-          future: FirebaseFunctions.getTasks(selectedDate),
+        StreamBuilder(
+          stream: FirebaseFunctions.getTasksStream(selectedDate),
           builder: (context, snapshot) {
             if(snapshot.connectionState==ConnectionState.waiting){return Center(child: CircularProgressIndicator());}
             if(snapshot.hasError){return Center(child: Text("Something Went wrong"));}
             List<TaskModel> tasks=snapshot.data?.docs.map((task) => task.data()).toList()??[];
+            if(tasks.isEmpty){return Center(child: Text("No Tasks")); }
             return Expanded(child: ListView.builder(itemBuilder: (context, index) => TaskItem(tasks[index]),itemCount: tasks.length,));
           },
         )
+
+        // FutureBuilder(
+        //   future: FirebaseFunctions.getTasks(selectedDate),
+        //   builder: (context, snapshot) {
+        //     if(snapshot.connectionState==ConnectionState.waiting){return Center(child: CircularProgressIndicator());}
+        //     if(snapshot.hasError){return Center(child: Text("Something Went wrong"));}
+        //     List<TaskModel> tasks=snapshot.data?.docs.map((task) => task.data()).toList()??[];
+        //     return Expanded(child: ListView.builder(itemBuilder: (context, index) => TaskItem(tasks[index]),itemCount: tasks.length,));
+        //   },
+        // )
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:third/models/user_model.dart';
 import 'package:third/providers/provider.dart';
 import 'package:third/screens/tasks_tab/add_task_bottom_sheet.dart';
 import 'package:third/screens/tasks_tab/tasks_tab.dart';
@@ -9,7 +10,9 @@ static const String routeName="layout";
 List<Widget>tabs=[TasksTab(),SettingsTab()];
   @override
   Widget build(BuildContext context) {
+    // var user=ModalRoute.of(context)?.settings.arguments as UserModel;
     var provider=Provider.of<MyProider>(context);
+    // provider.setUser(user);
     return SafeArea(
         child: Scaffold(
           extendBody: true,
