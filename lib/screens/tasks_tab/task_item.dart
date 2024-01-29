@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:third/providers/provider.dart';
+import 'package:third/screens/edit_task_tab/edit_task_tab.dart';
 import 'package:third/shared/styles/colors.dart';
 import '../../models/task_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../shared/network/firebase/firebase_functions.dart';
 class TaskItem extends StatefulWidget {
   TaskModel? task;
-
   TaskItem(this.task);
-
   @override
   State<TaskItem> createState() => _TaskItemState();
 }
-
 class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class _TaskItemState extends State<TaskItem> {
               SlidableAction(
                 borderRadius:BorderRadius.only(topLeft:Radius.circular(14),bottomLeft: Radius.circular(14) ) ,
                 onPressed: (context) {
-                  // FireBaseFunctions.deleteTask(task.id);
+                  FirebaseFunctions.deleteTask(widget.task!.id);
                   },
                 backgroundColor: Color(0xFFFE4A49),
                 foregroundColor: Colors.white,
@@ -53,7 +52,10 @@ class _TaskItemState extends State<TaskItem> {
               children: [
                 SlidableAction(
                   borderRadius:BorderRadius.only(topRight:Radius.circular(14),bottomRight: Radius.circular(14) ) ,
-                  onPressed: (context) {},
+                  onPressed: (context) {
+                    Navigator.pushNamed(context,EditTaskScreen.routeName,arguments: widget.task!);
+                    // FirebaseFunctions.updateTask(widget.task!);
+                  },
                   backgroundColor: MainColors.secondryLightColor,
                   // foregroundColor: Colors.white,
                   icon: Icons.edit,
@@ -109,7 +111,7 @@ class _TaskItemState extends State<TaskItem> {
                             width: 4,
                           ),
                           Text(
-                            "10:30 AM",
+                            "${DateFormat("yyyy/MM/dd").format(DateTime.fromMillisecondsSinceEpoch(widget.task!.tasktime))}",
                             style: GoogleFonts.roboto(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -135,8 +137,9 @@ class _TaskItemState extends State<TaskItem> {
                         ? Text(AppLocalizations.of(context)!.done,
                             style: Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 22,color: MainColors.green))
                         : InkWell(
-                      onTap: () {
+                          onTap: () {
                         widget.task!.isdone=true;
+                        FirebaseFunctions.updateTaskTobeDone(widget.task!);
                         setState(() {});
                       },
                           child: Icon(

@@ -14,5 +14,6 @@
   "tasktitle": "عنوان المهمة",
   "taskdetails": "تفاصيل المهمة",
   "savechanges": "حفظ التعديلات",
-  "done" : "! تمت"
+  "done" : "تمت !",
+  "edittask": "تعديل المهمة"
 }

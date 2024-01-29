@@ -1,14 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:third/models/task_model.dart';
 import 'package:third/shared/network/firebase/firebase_functions.dart';
 import 'package:third/shared/styles/colors.dart';
-
 class AddTaskBottomSheet extends StatefulWidget {
   @override
   State<AddTaskBottomSheet> createState() => _AddTaskBottomSheetState();
 }
-
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   var tasktitlecontroller=TextEditingController();
 
@@ -67,12 +66,17 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             SizedBox(height: 20,),
             ElevatedButton(
                 style:ElevatedButton.styleFrom(backgroundColor: MainColors.secondryLightColor) ,
-                onPressed: (){
-               if(formkey.currentState!.validate()){
-                 TaskModel task=TaskModel(tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text, tasktime:DateUtils.dateOnly(selecteddate).millisecondsSinceEpoch);
-                 FirebaseFunctions.addTask(task).then((value) {Navigator.pop(context);});
-               }
-            },
+            //     onPressed: (){
+            //    if(formkey.currentState!.validate()){
+            //      TaskModel task=TaskModel(tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text, tasktime:DateUtils.dateOnly(selecteddate).millisecondsSinceEpoch);
+            //      FirebaseFunctions.addTask(task).then((value) {Navigator.pop(context);});
+            //    }
+            // },
+                onPressed: (){if(formkey.currentState!.validate()){
+                    TaskModel task=TaskModel(userId: FirebaseAuth.instance.currentUser!.uid,tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text, tasktime:DateUtils.dateOnly(selecteddate).millisecondsSinceEpoch);
+                    FirebaseFunctions.addTask(task);
+                    Navigator.pop(context);
+                  }},
                 child: Text(AppLocalizations.of(context)!.savetask,style: Theme.of(context).textTheme.labelLarge!.copyWith(
                 color: MainColors.whited
             ))

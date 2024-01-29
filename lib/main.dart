@@ -6,15 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:third/layout/home_layout.dart';
 import 'package:third/providers/provider.dart';
 import 'package:third/screens/edit_task_tab/edit_task_tab.dart';
+import 'package:third/screens/login_tab/login.dart';
 import 'package:third/shared/styles/theming.dart';
-
 import 'firebase_options.dart';
 void main() async {
 WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider(
+// FirebaseFirestore.instance.disableNetwork();
+runApp(ChangeNotifierProvider(
       create: (context) => MyProider(),
       child: MyApp()));
 }
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeLayout.routeName:(context) => HomeLayout(),
         EditTaskScreen.routeName:(context) => EditTaskScreen(),
+        Login.routeName:(context) => Login(),
       },
-      initialRoute: HomeLayout.routeName,
+      initialRoute:provider.firbaseUser!=null?HomeLayout.routeName :Login.routeName,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         AppLocalizations.delegate, // Add this line
