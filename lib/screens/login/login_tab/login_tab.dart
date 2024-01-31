@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:third/base.dart';
 import 'package:third/providers/provider.dart';
 import 'package:third/screens/login/login_tab/connector.dart';
 import 'package:third/screens/login/login_tab/login_view_model.dart';
@@ -11,7 +12,10 @@ class LoginTab extends StatefulWidget  {
   State<LoginTab> createState() => _LoginTabState();
 }
 
-class _LoginTabState extends State<LoginTab> implements LoginConnector {
+// class _LoginTabState extends State<LoginTab> implements LoginConnector
+class _LoginTabState extends BaseView<LoginViewModel,LoginTab> implements LoginConnector
+
+{
   LoginViewModel loginViewModel=LoginViewModel();
 
 var formKey=GlobalKey<FormState>();
@@ -23,7 +27,7 @@ var passwordcontroller=TextEditingController();
   void initState() {
     // TODO: implement initState
     super.initState();
-    loginViewModel.loginConnector=this;
+    loginViewModel.conncetor=this;
   }
 
   @override
@@ -104,5 +108,10 @@ var passwordcontroller=TextEditingController();
       ElevatedButton(onPressed:() {Navigator.pop(context);} , child: Text("thanks"))
     ],));
 
+  }
+
+  @override
+  LoginViewModel initMyViewModel() {
+    return LoginViewModel();
   }
 }
