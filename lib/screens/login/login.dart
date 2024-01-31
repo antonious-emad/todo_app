@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:third/screens/login_tab/login_tab.dart';
-import 'package:third/screens/login_tab/sign_up_tab.dart';
+import 'package:third/screens/login/sign_up_tab.dart';
 import 'package:third/shared/styles/colors.dart';
+
+import 'login_tab/login_tab.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

@@ -3,12 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:third/models/task_model.dart';
-import 'package:third/screens/login_tab/login_tab.dart';
 import 'package:third/screens/tasks_tab/task_item.dart';
 import 'package:third/shared/network/firebase/firebase_functions.dart';
 import 'package:third/shared/styles/colors.dart';
 import '../../providers/provider.dart';
-import '../login_tab/login.dart';
+import '../login/login.dart';
 class TasksTab extends StatefulWidget {
   static const String routeName = "TasksTab";
 

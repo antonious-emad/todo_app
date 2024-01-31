@@ -69,26 +69,6 @@ static Future<void>createuser(String name,int age,String email,String password,F
     print(e);
   }}
 
-static Future<void> Login(String email,String password,Function onSucess, Function onError )async{
-  try {
-    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password
-    );
-    if(credential.user?.uid !=null){
-      // var user= await readUserFromFirestore(credential.user!.uid);
-      // onSucess(user);
-      if(credential.user!.emailVerified){onSucess();}
-      else{onError("please veritify your email ");}
-    }
-  } on FirebaseAuthException catch (e) {
-    onError("Wrong email or password ");
-    // onError(e.code);
-    // onError(e.message);
-    // if (e.code == 'user-not-found') {onError(e.message);print('Wrong user Name or password');}
-    // else if (e.code == 'wrong-password') {onError(e.message);print('Wrong user Name or password ');}
-  }
-  }
 
 
   static CollectionReference<UserModel> getUsersCollection(){

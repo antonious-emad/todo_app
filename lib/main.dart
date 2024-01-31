@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:third/layout/home_layout.dart';
 import 'package:third/providers/provider.dart';
 import 'package:third/screens/edit_task_tab/edit_task_tab.dart';
-import 'package:third/screens/login_tab/login.dart';
+import 'package:third/screens/login/login.dart';
 import 'package:third/shared/styles/theming.dart';
 import 'firebase_options.dart';
 void main() async {
