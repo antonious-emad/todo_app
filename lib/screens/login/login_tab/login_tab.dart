@@ -19,6 +19,12 @@ var formKey=GlobalKey<FormState>();
 var emailcontroller=TextEditingController();
 
 var passwordcontroller=TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginViewModel.loginConnector=this;
+  }
 
   @override
   Widget build(BuildContext context) {
