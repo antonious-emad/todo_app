@@ -23,8 +23,20 @@ class SignUpTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
+              decoration: InputDecoration(
+                        labelText: "Name",
+                        hintText: "Name",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
               controller: namecontroller,
-              decoration: const InputDecoration(labelText: 'Name'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -33,9 +45,21 @@ class SignUpTab extends StatelessWidget {
               },
             ),
             TextFormField(
+              decoration:InputDecoration(
+                        labelText: "age",
+                        hintText: "age",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
               keyboardType: TextInputType.number,
               controller: agecontroller,
-              decoration: const InputDecoration(labelText: 'age'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -44,9 +68,21 @@ class SignUpTab extends StatelessWidget {
               },
             ),
             TextFormField(
+              decoration:InputDecoration(
+                        labelText:"Email" ,
+                        hintText: "Email",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
               keyboardType: TextInputType.emailAddress,
               controller: emailcontroller,
-              decoration: const InputDecoration(labelText: 'Email'),
               validator: (value) {
                 // final bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[com]+").hasMatch(value!);
                 if (value == null || value.isEmpty) {
@@ -57,9 +93,21 @@ class SignUpTab extends StatelessWidget {
               },
             ),
             TextFormField(
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
               controller: passwordcontroller,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration:InputDecoration(
+                        labelText: "password",
+                        hintText: "password",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
               validator: (value) {
                 // RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                 if (value == null || value.isEmpty) {
@@ -97,7 +145,7 @@ class SignUpTab extends StatelessWidget {
                   });
                 }
               },
-              child: const Text('Login'),
+              child: const Text('register',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

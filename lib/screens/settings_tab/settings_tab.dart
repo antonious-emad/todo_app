@@ -70,7 +70,7 @@ class SettingsTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(onTap: () {
-                  provider.ChangeMode(false);
+                  provider.ChangeMode(false,ThemeMode.light);
                 },child: Row(
                   children: [
                     provider.isDark==false?Text(AppLocalizations.of(context)!.light,style: Theme.of(context).textTheme.bodyMedium):Text(AppLocalizations.of(context)!.light,style: TextStyle(color:provider.isDark?MainColors.whited:Colors.black54) ),
@@ -80,7 +80,7 @@ class SettingsTab extends StatelessWidget {
                 )),
                 SizedBox(height: 25,),
                 InkWell(onTap: () {
-                  provider.ChangeMode(true);
+                  provider.ChangeMode(true,ThemeMode.dark);
                   // AppLocalizations.of(context)!.localeName=Locale("en");
                   // setState(() {});
                 },child: Row(

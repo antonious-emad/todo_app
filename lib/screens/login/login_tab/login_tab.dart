@@ -43,8 +43,20 @@ var passwordcontroller=TextEditingController();
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
+                style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
                 controller: emailcontroller,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                        labelText: "Email",
+                        hintText: "Email",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
@@ -53,9 +65,21 @@ var passwordcontroller=TextEditingController();
                 },
               ),
               TextFormField(
+                style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
                 controller: passwordcontroller,
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                        labelText:"Passord",
+                        hintText: "Password",
+                        hintStyle:Theme.of(context).textTheme.headlineMedium,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: MainColors.bor)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
+                        ),
+                        errorStyle: TextStyle(color: Colors.red,),
+                      ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
@@ -78,7 +102,7 @@ var passwordcontroller=TextEditingController();
                   );
                   }
                 },
-                child: const Text('Login'),
+                child: const Text('Login',style: TextStyle(color: Colors.white),),
               ),
             ],
           ),

@@ -19,7 +19,7 @@ class LoginViewModel extends BaseViewModel<LoginConnector> {
       if(credential.user?.uid !=null){
         // var user= await readUserFromFirestore(credential.user!.uid);
         // onSucess(user);
-        await credential.user!.sendEmailVerification();
+        // await credential.user!.sendEmailVerification();
         if(credential.user!.emailVerified){
           // loginConnector.hideLoading() ;
           // loginConnector.goToHome();

@@ -31,6 +31,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             Text(AppLocalizations.of(context)!.addnewtask,style: Theme.of(context).textTheme.labelSmall,textAlign: TextAlign.center,),
             SizedBox(height: 10,),
             TextFormField(
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
               validator: (value) {if(value==null ||value.isEmpty ){return  AppLocalizations.of(context)!.enteryourtasktitle;}return null;},
               controller: tasktitlecontroller,
               decoration: InputDecoration(
@@ -40,12 +41,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 borderSide: BorderSide(color: MainColors.bor)
               ),
               focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: MainColors.bor)
+                  borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
               ),
                 errorStyle: TextStyle(color: Colors.red,),
             ),),
             SizedBox(height: 20,),
-            TextFormField(validator: (value) {if(value==null ||value.isEmpty ){return  AppLocalizations.of(context)!.enteryourtaskdetails;}return null;},
+            TextFormField(
+              
+              style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
+              validator: (value) {if(value==null ||value.isEmpty ){return  AppLocalizations.of(context)!.enteryourtaskdetails;}return null;},
               controller: taskdescripitiontroller,decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.enteryourtaskdetails,
               hintStyle:Theme.of(context).textTheme.headlineMedium,
@@ -53,7 +57,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   borderSide: BorderSide(color: MainColors.bor)
               ),
               focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: MainColors.bor)
+                  borderSide: BorderSide(color: Theme.of(context).colorScheme.errorContainer)
               ),
               errorStyle: TextStyle(color: Colors.red,),
             ),),

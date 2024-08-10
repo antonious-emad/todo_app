@@ -19,7 +19,8 @@ class Theming {
         onBackground: MainColors.secondryLightColor,
         surface: MainColors.primaryLightColor,
         onSurface: Colors.white,
-        onErrorContainer: Colors.black
+        onErrorContainer: Colors.black,
+      errorContainer: MainColors.shamed
     ),
     textTheme: TextStyles.lightTextTheme,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -29,8 +30,8 @@ class Theming {
       showUnselectedLabels: false,
       selectedItemColor: MainColors.secondryLightColor,
       unselectedItemColor:Color(0xffc8c9cb),
-      selectedIconTheme: IconThemeData(size: 40,color:  MainColors.secondryLightColor),
-      unselectedIconTheme: IconThemeData(size: 35,color:  Color(0xffc8c9cb)),
+      selectedIconTheme: IconThemeData(size: 19,color:  MainColors.secondryLightColor),
+      unselectedIconTheme: IconThemeData(size: 19,color:  Color(0xffc8c9cb)),
       selectedLabelStyle: GoogleFonts.elMessiri(fontSize: 15, fontWeight: FontWeight.bold),
     ),
     scaffoldBackgroundColor: MainColors.primaryLightColor,
@@ -59,17 +60,18 @@ class Theming {
         onBackground: Colors.white,
         surface: MainColors.secondrydarkColor,
         onSurface: MainColors.secondrydarkColor,
-        onErrorContainer: MainColors.whited
+        onErrorContainer: MainColors.whited,
+      errorContainer: MainColors.specialWhite
     ),
     textTheme: TextStyles.darkTextTheme,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
-      showSelectedLabels: true,
+      showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor:  MainColors.secondryLightColor,
       unselectedItemColor: Color(0xffc8c9cb),
-      selectedIconTheme: IconThemeData(size: 35),
-      unselectedIconTheme: IconThemeData(size: 35),
+      selectedIconTheme: IconThemeData(size: 19),
+      unselectedIconTheme: IconThemeData(size: 19),
       selectedLabelStyle: GoogleFonts.elMessiri(fontSize: 15, fontWeight: FontWeight.bold),
     ),
     scaffoldBackgroundColor: MainColors.primarydarkColor,

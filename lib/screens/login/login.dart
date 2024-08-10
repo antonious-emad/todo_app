@@ -15,8 +15,8 @@ static const String routeName="Login";
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(backgroundColor:MainColors.secondryLightColor ,title: Text("Login",style: Theme.of(context).textTheme.bodyLarge,),bottom: TabBar(tabs: [
-           Tab(icon: Icon(Icons.login),child:Text("Login") ,),
-          Tab(icon: Icon(Icons.logout),child:Text("register") ,),
+           Tab(icon: Icon(Icons.login,color: Colors.white),child:Text("Login",style: TextStyle(color: Colors.white),) ,),
+          Tab(icon: Icon(Icons.logout,color: Colors.white,),child:Text("register",style: TextStyle(color: Colors.white),) ,),
         ]),),
         body: TabBarView(
           children: [

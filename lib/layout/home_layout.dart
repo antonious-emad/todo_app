@@ -15,7 +15,7 @@ List<Widget>tabs=[TasksTab(),SettingsTab()];
     // provider.setUser(user);
     return SafeArea(
         child: Scaffold(
-          extendBody: true,
+          extendBody: false,
          body: tabs[provider.index],
          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
          floatingActionButton:FloatingActionButton(
@@ -39,13 +39,14 @@ List<Widget>tabs=[TasksTab(),SettingsTab()];
            shape:const  CircularNotchedRectangle(),
            notchMargin: 8,
            child: BottomNavigationBar(
+             type: BottomNavigationBarType.shifting,
              elevation: 0,
              onTap: (value) {
             provider.changeindex(value);
         },
              currentIndex: provider.index,
              items: [
-            BottomNavigationBarItem(backgroundColor: Colors.transparent,label: "",icon: Icon(Icons.list)),
+            BottomNavigationBarItem(backgroundColor: Colors.transparent,label: "",icon: Icon(Icons.list,)),
             BottomNavigationBarItem(backgroundColor: Colors.transparent,label: "",icon: Icon(Icons.settings)),
         ],
       ),

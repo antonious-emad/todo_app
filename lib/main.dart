@@ -9,14 +9,18 @@ import 'package:third/screens/edit_task_tab/edit_task_tab.dart';
 import 'package:third/screens/login/login.dart';
 import 'package:third/shared/styles/theming.dart';
 import 'firebase_options.dart';
+
 void main() async {
 WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+MyProider provider = MyProider();
+await Future.wait([provider.cashTheme(), provider.cashLanguage()]);
+
 // FirebaseFirestore.instance.disableNetwork();
 runApp(ChangeNotifierProvider(
-      create: (context) => MyProider(),
+      create: (context) => provider,
       child: MyApp()));
 }
 class MyApp extends StatelessWidget {

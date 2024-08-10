@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:third/layout/home_layout.dart';
 import 'package:third/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/task_model.dart';
@@ -14,10 +15,13 @@ final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 final TextEditingController tasktitlecontroller = TextEditingController();
 final TextEditingController taskdescripitiontroller = TextEditingController();
 DateTime selecteddate=DateTime.now();
+bool choose = false;
+var dateData;
+
 class _TelaCadastroState extends State<EditTaskScreen> {
   @override
   Widget build(BuildContext context) {
-    var task=ModalRoute.of(context)?.settings.arguments as TaskModel;
+    var taskaia=ModalRoute.of(context)?.settings.arguments as TaskModel;
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.onError,
         body: Stack(
@@ -59,30 +63,32 @@ class _TelaCadastroState extends State<EditTaskScreen> {
                     TextFormField(
                       validator: (value) {if(value==null ||value.isEmpty ){return  AppLocalizations.of(context)!.enteryourtasktitle;}return null;},
                       controller: tasktitlecontroller,
+                      style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
                       decoration: InputDecoration(
-                        hintText: task.tasktitle,
+                        hintText: taskaia.tasktitle,
                         hintStyle:Theme.of(context).textTheme.headlineMedium,
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: MainColors.bor)
                         ),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: MainColors.bor)
+                            borderSide: BorderSide(color:  Theme.of(context).colorScheme.errorContainer)
                         ),
                         errorStyle: TextStyle(color: Colors.red,),
                       ),
                     ),
                     SizedBox(height: 20,),
                     TextFormField(
+                      style: TextStyle(color: Theme.of(context).colorScheme.errorContainer),
                       validator: (value) {if(value==null ||value.isEmpty ){return  AppLocalizations.of(context)!.enteryourtasktitle;}return null;},
                       controller: taskdescripitiontroller,
                       decoration: InputDecoration(
-                        hintText: task.taskdescription,
+                        hintText: taskaia.taskdescription,
                         hintStyle:Theme.of(context).textTheme.headlineMedium,
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: MainColors.bor)
                         ),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: MainColors.bor)
+                            borderSide: BorderSide(color: Theme.of(context).colorScheme.errorContainer)
                         ),
                         errorStyle: TextStyle(color: Colors.red,),
                       ),
@@ -98,9 +104,10 @@ class _TelaCadastroState extends State<EditTaskScreen> {
                         style:ElevatedButton.styleFrom(padding: EdgeInsets.all(12),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),backgroundColor: MainColors.secondryLightColor) ,
                         onPressed: (){
                           if(formkey.currentState!.validate()){
-                            TaskModel task=TaskModel(userId: FirebaseAuth.instance.currentUser!.uid,tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text,
+                            TaskModel task=TaskModel(id:taskaia.id,userId: FirebaseAuth.instance.currentUser!.uid,tasktitle: tasktitlecontroller.text, taskdescription: taskdescripitiontroller.text,
                                 tasktime:DateUtils.dateOnly(selecteddate).millisecondsSinceEpoch);
-                            FirebaseFunctions.addTask(task).then((value) {Navigator.pop(context);Navigator.pop(context);});
+                            FirebaseFunctions.updateTask(task);
+                           Navigator.pushNamedAndRemoveUntil(context, HomeLayout.routeName, (route) => false);
                           }
                         },
                         child: Text(AppLocalizations.of(context)!.savetask,style: Theme.of(context).textTheme.labelLarge!.copyWith(

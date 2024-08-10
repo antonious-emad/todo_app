@@ -39,7 +39,13 @@ class FirebaseFunctions {
   }
 
   static void updateTask(TaskModel task) {
-    getTasksCollection().doc(task.id).update(task.toJson());
+    getTasksCollection().doc(task.id).update(
+        {
+          "tasktitle": task.tasktitle,
+        "tasktime": task.tasktime,
+        "description": task.taskdescription,
+    }
+    );
   }
 
   static void updateTaskTobeDone(TaskModel task) {

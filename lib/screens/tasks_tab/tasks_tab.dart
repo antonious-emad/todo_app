@@ -32,15 +32,23 @@ class _TasksTabState extends State<TasksTab> {
               padding: EdgeInsets.all(20),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("To Do List ${provider.userModel?.name} ",
-                      style: Theme.of(context).textTheme.bodyLarge),
-                  Spacer(),
+                  // Text("To Do List ${provider.userModel?.name} ",
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("To Do List ",
+                          style: Theme.of(context).textTheme.bodyLarge),
+                      Text(" ${FirebaseAuth.instance.currentUser!.email} ",
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15)),
+                    ],
+                  ),
                   InkWell(onTap: () {
                     FirebaseAuth.instance.signOut();
                     Navigator.pushNamedAndRemoveUntil(context, Login.routeName, (route) => false);
                   },child: Icon(Icons.logout)),
+                  SizedBox(width: MediaQuery.of(context).size.width*0.01,),
                   InkWell(onTap: () {
                     FirebaseAuth.instance.sendPasswordResetEmail(email: provider.userModel!.email );
                     Navigator.pushNamedAndRemoveUntil(context, Login.routeName, (route) => false);
@@ -80,7 +88,7 @@ class _TasksTabState extends State<TasksTab> {
           ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: MediaQuery.of(context).size.height * 0.07,
         ),
         StreamBuilder(
           stream: FirebaseFunctions.getTasksStream(selectedDate),
